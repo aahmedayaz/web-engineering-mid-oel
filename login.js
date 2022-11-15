@@ -3,6 +3,7 @@ let credentails = document.getElementById('credentials')
 let userName =document.getElementById('userName');
 let email = document.getElementById('email');
 let pin = document.getElementById('pin');
+let submit = document.getElementById('submit');
 let userNameError =document.getElementById('username-error-msg');
 let emailError = document.getElementById('email-error-msg');
 let pinError = document.getElementById('pin-error-msg');
@@ -126,6 +127,21 @@ const checkPin = (field , min) => {
         pinError.innerText = '\u2713 Valid Password'
     }
 }
+
+submit.addEventListener('click', e => {
+    e.preventDefault();
+    if(userName.value === '' || email.value === '' || pin === '') {
+        return alert('Bad Request: Please enter valid data.');
+    }
+
+    if(userName.value === 'ayaz' && email.value === 'ayaz@gmail.com' && pin.value === '12345') {
+        // success
+        window.location.href = '/dashboard.html'
+    } else {
+        return alert('UnAuthoirized: User is unauthorized.')
+    }
+
+})
 
 
 // Input Animation
