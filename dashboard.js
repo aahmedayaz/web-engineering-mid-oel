@@ -45,7 +45,7 @@ let myProductsForRent_ALL_PRODUCTS = [
         id: '1668516905187',
         title: 'products 05',
         image: './dashboardAssets/headphone3.jpg',
-        rent: 400,
+        rent: 300,
         owner: 'me',
     },
     {
@@ -56,9 +56,24 @@ let myProductsForRent_ALL_PRODUCTS = [
         owner: 'me',
     },
 ]
-let myBookedProducts_tenant = []
-let myBookedProducts_owner = []
 let myProductsToRent = myProductsForRent_ALL_PRODUCTS.filter(product => product.owner == 'me');
+let myBookedProducts_tenant = [
+    {
+        id: '1668516905183',
+        title: 'products 01',
+        image: './dashboardAssets/headphone3.jpg',
+        rent: 100,
+        owner: 'other',
+    },
+    {
+        id: '1668516905184',
+        title: 'products 02',
+        image: './dashboardAssets/sneaker2.jpg',
+        rent: 200,
+        owner: 'other',
+    },
+]
+let myBookedProducts_owner = myProductsForRent_ALL_PRODUCTS.filter(product => product.owner == 'me');
 let swapImage = true;
 const addMyProductsToRent = (title, rent) => {
     swapImage = !swapImage;
@@ -140,9 +155,13 @@ const updateTabTwoUI = () => {
         `).join('')
     }
     `
+    if(myProductsToRent.length === 0) {
+        tabTwo.innerHTML = '<p>No products found.</p>'
+    }
 }
 const updateTabThreeUI = () => {
     const tenantProducts = document.getElementById('tenant-products');
+    const payRentProducts = document.getElementById('pay-rent-products');
     tenantProducts.innerHTML = `
     ${
         myBookedProducts_tenant.map(product => `
@@ -158,7 +177,26 @@ const updateTabThreeUI = () => {
     if(myBookedProducts_tenant.length === 0) {
         tenantProducts.innerHTML = '<p>No tenant products found.</p>'
     }
+    payRentProducts.innerHTML = `
+    ${
+        myBookedProducts_tenant.map(product => `
+            <div class="product" id="${product.id}">
+                ${product.owner === 'me' ? '<small>My Product</small>': ''}
+                <img src="${product.image}" alt="">
+                <p>${product.title}</p>
+                <span>Rent : ${product.rent} USD</span>
+                <button>Pay Rent</button>
+            </div>
+        `).join('')
+    }
+    `
+    if(myBookedProducts_tenant.length === 0) {
+        payRentProducts.innerHTML = '<p>No tenant products found.</p>'
+    }
+
+
     const ownerProducts = document.getElementById('owner-products');
+    const collectRentProducts = document.getElementById('collect-rent-products');
     ownerProducts.innerHTML = `
     ${
         myBookedProducts_owner.map(product => `
@@ -174,6 +212,22 @@ const updateTabThreeUI = () => {
     if(myBookedProducts_owner.length === 0) {
         ownerProducts.innerHTML = '<p>No owner products found.</p>'
     }
+    collectRentProducts.innerHTML = `
+    ${
+        myBookedProducts_owner.map(product => `
+            <div class="product" id="${product.id}">
+                ${product.owner === 'me' ? '<small>My Product</small>': ''}
+                <img src="${product.image}" alt="">
+                <p>${product.title}</p>
+                <span>Rent : ${product.rent} USD</span>
+                <button>Collect Rent</button>
+            </div>
+        `).join('')
+    }
+    `
+    if(myBookedProducts_owner.length === 0) {
+        collectRentProducts.innerHTML = '<p>No owner products found.</p>'
+    }
 }
 
 form.addEventListener('submit', e => {
@@ -184,6 +238,15 @@ form.addEventListener('submit', e => {
     title.value = ''
     rent.value = ''
 });
+
+document.getElementById('goto-dashboard').addEventListener('click', e => {
+    document.getElementById('pay-collect').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+})
+document.getElementById('goto-pay-collect').addEventListener('click', e => {
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('pay-collect').style.display = 'block';
+})
 
 updateDashboardUI();
 

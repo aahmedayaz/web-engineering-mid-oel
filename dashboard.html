@@ -22,10 +22,10 @@
             </div>
         </div>
         <div class="sidebar">
-            <div class="sidebar-dashboard"><a href="">My DashBoard</a></div>
-            <div class="sidebar-rent-pay-collect"><a href="">Pay/Collect Rent</a></div>
+            <div class="sidebar-dashboard" id="goto-dashboard">My DashBoard</div>
+            <div class="sidebar-rent-pay-collect" id="goto-pay-collect">Pay/Collect Rent</div>
         </div>
-        <div class="dashboard">
+        <div id="dashboard" class="dashboard">
             <h1>All Available Products</h1>
             <div class="note">
                 <b>********* Note ********</b>
@@ -72,13 +72,29 @@
                 </div>
             </div>
         </div>
-        <div class="pay-collect">
+        <div id="pay-collect" class="pay-collect">
             <h1>Collect Rent</h1>
-            <div class="tabOne">
+            <div class="tabOne" id="collect-rent-products">
+                <!-- <div class="product">
+                    <img src="./dashboardAssets/watch1.jpeg" alt="">
+                    <span>Rent : 250 USD</span>
+                    <button>Collect Rent</button>
+                </div> -->
             </div>
             <h1>Pay Rent</h1>
-            <div class="tabTwo">
-
+            <div class="tabTwo" id="pay-rent-products">
+                <!-- <div class="product">
+                    <img src="./dashboardAssets/watch1.jpeg" alt="">
+                    <span>Rent : 250 USD</span>
+                    <button>Pay Rent</button>
+                </div> -->
+            </div>
+            <div class="total">
+                <b>Total Rent Collected :</b>
+                <small id="total-collected">0</small>
+                <br>
+                <b>Total Rent Paid :</b>
+                <small id="total-paid">0</small>
             </div>
         </div>
         <div class="payCollectRent"></div>
